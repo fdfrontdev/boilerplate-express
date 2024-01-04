@@ -8,3 +8,4 @@ docker run -d -p 3000:3000 -p 5432:5432 --name container_server_authentication i
 local postgresql
 superuser: postgres
 password : admin
+port : 5433
