@@ -1,3 +1,10 @@
-# Basic Node and Express
+build docker image command:
+docker build . -t image_server_authentication:v.0.1.0  
 
-This is the boilerplate code for the Basic Node and Express Challenges. Instructions for working on these challenges start at https://www.freecodecamp.org/learn/apis-and-microservices/basic-node-and-express/
+run docker container:
+docker run -d -p 3000:3000 -p 5432:5432 --name container_server_authentication image_server_authentication
+
+
+local postgresql
+superuser: postgres
+password : admin
