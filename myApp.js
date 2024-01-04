@@ -8,19 +8,17 @@ app.get('/', (req, res) => {
 })
 
 // mount the public folder
-app.use("/public",express.static( __dirname + '/public'));
+app.use("/public", express.static(__dirname + '/public'));
 
-app.get('/json',(req,res)=>{
-    console.log(process.env.MESSAGE_STYLE)
-    console.log(typeof process.env.MESSAGE_STYLE)
-    if(process.env.MESSAGE_STYLE === "uppercase"){
-        res.json({"message":"HELLO JSON"})
-    }
-    else{
-        res.json({"message":"Hello json"})
-    }
 
-    
+app.get('/authentication', (req, res) => {
+
+    res.json({ 
+        "status": 200,
+        "message": "success",
+        "data": {"authenticated": true, "user": "admin", "roles": ["admin", "user"]} 
+    })
+
 })
 
 
