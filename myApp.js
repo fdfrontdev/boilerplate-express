@@ -21,34 +21,34 @@ app.get('/authentication', (req, res) => {
 })
 
 
-app.get('/database_status', (req, res) => {
+app.get('/users', (req, res) => {
 
     const status = undefined
     const details = undefined
+    const allUsers = undefined
 
-    const params = {
-        host: 'localhost',
-        port: 5432,
-        database: '',
-        user: 'admin',
-        password: 'admin12345',
+    const { PrismaClient } = require('@prisma/client')
+
+    const prisma = new PrismaClient()
+
+    async function main() {
+        allUsers = await prisma.user.findMany()
+        console.log(allUsers)
     }
 
-    const { Client } = require('pg');
-    const client = new Client(params);
-
-    client.connect().then(() => {
-        console.log("connected to PostgreSQL");
-        status = true
-    }).catch(err => {
-        console.log(err);
-        status = false
-    });
+    main()
+        .then(async () => {
+            await prisma.$disconnect()
+        })
+        .catch(async (e) => {
+            console.error(e)
+            await prisma.$disconnect()
+            process.exit(1)
+        })
 
     res.json({
         "status": status,
-        "params" : params,
-        "details": {}
+        "details": allUsers
     })
 
 })
